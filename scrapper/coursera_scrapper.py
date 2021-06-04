@@ -18,18 +18,20 @@ data= {"university": [],
        "studets": [],
        "difficulty": []}
 
+driver = webdriver.Chrome('chromedriver') 
 def move_page(number):
     url = f"https://www.coursera.org/search?query=python&page={number}&index=prod_all_products_term_optimization"
-    driver = webdriver.Chrome('chromedriver') 
     driver.get(url) 
     html = driver.page_source
     soup = BeautifulSoup(html, "html.parser")
     courses = soup.find_all("li", attrs= {"class": "ais-InfiniteHits-item"})
     return courses
-
+import time
 def scrap_data():
-    for page in range(50, 97):
+    for page in range(1, 97):
+        print("Page: ", page, "Length: ", len(data["university"]))
         courses = move_page(page)
+        time.sleep(3)
         for course in courses:
             tail = course.find("div", attrs= {"class": "rc-ProductInfo"})
             head = course.find("div", attrs= {"class": "card-content"})
