@@ -28,7 +28,7 @@ def move_page(number):
     return courses
 
 def scrap_data():
-    for page in range(30, 50):
+    for page in range(50, 97):
         courses = move_page(page)
         for course in courses:
             tail = course.find("div", attrs= {"class": "rc-ProductInfo"})
@@ -44,7 +44,6 @@ def scrap_data():
             data['type'].append(type_.text if type_ else None)
 
             # --
-
 
             review = tail.find("span", attrs= {"class":"ratings-text"})
             data['review'].append(review.text if review else None)
