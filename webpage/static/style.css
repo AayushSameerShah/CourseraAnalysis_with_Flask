@@ -1,0 +1,135 @@
+*{
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+    background-color: #fffffa;
+}
+
+li, a{
+    font-family: "Neuville";
+    font-weight: normal;
+    font-size: 20px;
+    color: #4a4a4a;
+    text-decoration: none;
+    
+}
+
+header{
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+    padding: 40px 5%;
+
+}
+
+.logo{
+   cursor: pointer; 
+   margin-right: auto;
+}
+
+.links{
+    list-style: none;
+}
+
+.links li{
+    display: inline-block;
+    padding: 0px 20px;
+}
+
+.links li a{
+    transition: all 0.3s ease 0s;
+    padding: 0px 50px;
+}
+
+.links li a:hover{
+    color: rgb(255, 219, 102);
+}
+
+button{
+    padding: 9px 23px;
+    background-color: aquamarine;
+    border: none;
+
+}
+
+.hero{
+    display: flex;
+    align-items: center;
+    padding: 15% 9%;
+}
+
+#info{
+    margin-top: 10%;
+    display: flex;
+    align-items: center;
+}
+
+#whyData{
+    font-family: "Neuville";
+    font-size: 50px;
+    margin-left: 10%;
+}
+
+.blog{
+    font-family: "Neuville";
+    font-weight: lighter;
+    font-size: 30px;
+    width: 700px;
+}
+
+.blog a{
+    font-family: "Neuville";
+    font-weight: lighter;
+    font-size: 30px;
+    color: rgb(62, 62, 255);
+    transition: all 0.3s ease 0s;
+}
+
+.blog a:hover{
+    color: rgb(255, 219, 102);
+}
+
+.chartDiv{
+    margin-top: 10%;
+}
+
+.infoChart h1{
+    font-family: "Neuville";
+    font-weight: bold;
+    font-size: 50px;
+    margin-left: 5%;
+    
+
+}
+.infoChart p{
+    font-family: "Neuville";
+    font-weight: lighter;
+    font-size: 20px;
+    width: 80%;
+    margin-left: 5%;
+
+}
+
+.seperator{
+    margin-top: 100px;
+    text-align: center;
+    font-size: 50px;
+    color: 0000000#4a4a4a;
+    
+
+}
+
+.chart{
+    padding-top: 5%;
+}
+
+#special1{
+    margin-top: 10px;
+}
+
+#special2{
+    display: flex;
+    align-items: center;
+    padding: 0.2% 9%; 
+    margin-top: 10px; 
+}
