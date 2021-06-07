@@ -1,0 +1,176 @@
+<html>
+    <head>
+        <title>Coursera Python Coureses Analysis</title>
+        <link rel= 'stylesheet' href= "{{ url_for('static', filename= 'style.css') }}">
+    </head>
+    <body>
+    <header>
+        <img src="{{ url_for('static', filename= './light/logo.png') }}" height="50" width=" 50" class= "logo">
+        <nav>
+            <ul class= "links">
+                <li>
+                    <a href= "#"> Regenerate Colors </a>
+                    <a href= "https://github.com/AayushSameerShah/CourseraAnalysis_with_Flask"> Git </a>
+                    <a href= "#"> Contact </a>
+                </li>
+            </ul>
+            <div id= "div_neona">
+                <a href="http://localhost:5000/dark" id= "neona">
+                   DARK
+                </a>            
+            </div>
+        </nav>
+    </header>
+    <div class= "hero">
+        <img src= "{{ url_for('static', filename= './light/hero.png') }}"/>
+    </div> <br>
+    <div id= "info">
+        <img src="{{ url_for('static', filename= './light/sample1.gif') }}" width= 800 height= 400 />
+        <span id= "whyData">
+            <h1> DataSet </h1>
+            <h4> _ </h4><br>
+            <p class= "blog">
+                I have scrapped the data from <a href="coursera.org">coursera.org</a> and where those courses which include Python as its one of the languages. Scrapped all 949 programs including Python as its central language.
+            </p>
+        </span>
+    </div>
+    <div id= "info">
+        <span id= "whyData">
+            <h1> HowTo </h1>
+            <h4> _ </h4><br>
+            <p class= "blog">
+                This webpage shows the interesting features from the dataset through an art of visualization. To learn more what and how, please visit this <a href="https://github.com/AayushSameerShah/CourseraAnalysis_with_Flask/blob/main/EDA.ipynb">StepByStep</a> guide - to learn more.
+            </p>
+        </span>
+        <img src="{{ url_for('static', filename= './light/sample2.gif') }}" width= 800 height= 800 />
+    </div>
+    <div class= "chartDiv">
+    <span class= "infoChart">
+        <h1>Top 10 universities by their number of courses</h1>
+        <p>
+            Here we can see that for the most of the cases, we are having Courrsera Project Network as a leading source of the program
+            in the field of python. But, when I tried to look at - Coursera project network provides the "GUIDED PROJECT". Which is a
+            type of the program. If we are just interested in the courses like specialization and certifications, then this graph is helpful.
+        </p>
+    </span>
+        <center><img src="{{ url_for('static', filename= './light/top10unicourses.png') }}" width=90% height= 72% /></center>
+        <center><img src="{{ url_for('static', filename= './light/top10unicourses2.png') }}" width=90% height= 72% /></center>
+
+    <div class="seperator">. . .</div>
+    <div class= "chartDiv">
+        <span class= "infoChart">
+            <h1>Course type distrubution</h1>
+            <p>
+                So, yea - coursera offers various 'COURSES' on python. The specialization seems to be on the third.
+                Let's see which university from top10 offers what.
+            </p>
+        </span>
+        <center><img class= 'chart' src="{{ url_for('static', filename= './light/coursetype.png') }}" width=90% height= 100% /></center>
+    </div>
+    
+    <div class="seperator">. . .</div>
+
+    <div class= "chartDiv">
+        <span class= "infoChart">
+            <h1>Average Reviews</h1>
+            <p>
+                This chart shows the average reviews across all universities. I have taken those universities which hase higher amount of votes and the ratings. Then sorted with top 10 and bottom 10. Then the result shows that University of Michigan is on the top leaving IBM, Google, Stanford on the respective rank.
+            </p>
+        </span>
+        <center><img class= 'chart' src="{{ url_for('static', filename= './light/reviews.png') }}" width=90% height= 130% /></center>
+    </div>
+
+    <div class="seperator">. . .</div>
+
+    <div class= "chartDiv" id= "special1">
+       <center><img class= 'chart' src="{{ url_for('static', filename= './light/students.png') }}" width=90% height= 130% /></center>
+    </div>
+
+    <div class="seperator">. . .</div>
+
+    <div class= "chartDiv">
+        <span class= "infoChart">
+            <h1>Difficulty by courses</h1>
+            <p>
+                The chart shows how difficulty levels are divided into the type of courses in the dataset.
+            </p>
+        </span>
+        <center><img class= 'chart' src="{{ url_for('static', filename= './light/difficulty.png') }}" width=90% height= 90% /></center>
+    </div>
+
+    <div class="seperator">. . .</div>
+
+    <div class= "chartDiv">
+        <span class= "infoChart">
+            <h1>Difficulty by courses</h1>
+            <p>
+                This little table shows popular courses differentiated by their diffculty level. <i> Please <b>pardon my dust</b>, ↓ this is my trial to produce a text chart.</i>
+            </p>
+        </span>
+        <center><img class= 'chart' src="{{ url_for('static', filename= './light/difficultyCourses.png') }}" width=90% height= 65% /></center>
+    </div>
+
+    <div class="seperator">. . .</div>
+
+    <div class= "chartDiv" id= "special1">
+        <center><img class= 'chart' src="{{ url_for('static', filename= './light/AICourses.png') }}" width=90% height= 120% /></center>
+    </div>
+
+    <div class= "chartDiv">
+        <span class= "infoChart">
+            <h1>University studetnts differenciated by AI / Rest</h1>
+            <p>
+                2 out of 5 universities have students more in their respective AI courses, than the other courses, while other 3 universities (which are also in top 5 for AI course - not to forget that) have surprisingly low amount of students in AI than their rest of their courses.
+            </p>
+        </span>
+        <center><img class= 'chart' src="{{ url_for('static', filename= './light/AIpie.png') }}" width=90% height= 120% /></center>
+    </div>
+
+    <div class="seperator">. . .</div>
+
+    <div class= "chartDiv" id= "special2">
+        <center><img class= 'chart' src="{{ url_for('static', filename= './light/ring.png') }}" width= 800px height= 800px /></center>
+        <span class= "infoChart">
+            <h1>Word Frequency</h1>
+            <br>
+            <p>
+                This ring shows which terms are most often used in the courses from the top universities. Of course, python leads but surprisingly it also includes AI related words on the following rank.
+            </p>
+        </span>
+    </div>
+
+    <div class= "chartDiv" id= "special2">
+        <span class= "infoChart">
+            <h1>Overall Popular Words</h1>
+            <br>
+            <p>
+                What an amazing frame! No caption needed! &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+            </p>
+        </span>
+        <center><img class= 'chart' src="{{ url_for('static', filename= './light/wordcloud.png') }}" width= 800px height= 800px /></center>
+        
+    </div>
+
+
+
+    <div class="seperator">. . .</div>
+
+    <footer>
+        <br>
+        <br>
+        <center>
+            <hr class="hr"> <br>
+            <img src="{{ url_for('static', filename= './light/logo.png') }}" height="50" width=" 50" class= "logo"> 
+                <br> <br> This website is designed by Ayush ∞ Shah
+            <br>
+            <br>
+            <hr class="hr">
+        </center>
+        <br>
+        <br>
+
+    </footer>
+
+
+</body>
+</html>

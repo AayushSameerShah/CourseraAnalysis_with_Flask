@@ -33,7 +33,7 @@ header{
 
 .links li{
     display: inline-block;
-    padding: 0px 20px;
+    padding: 0px 100px;
 }
 
 .links li a{
@@ -133,3 +133,37 @@ button{
     padding: 0.2% 9%; 
     margin-top: 10px; 
 }
+
+#neona{
+    display: inline-block;
+    padding: 15px 30px;
+    color: #121f3b;
+    overflow: hidden;
+    transition: 0.5s;
+    border: #121f3b solid 1px;
+    
+}
+
+ #neona:hover{
+     color: #fffffa;
+     background: #121f3b;
+     box-shadow: 0 0 10px #121f3b, 0 0 20px #121f3b, 0 0 80px #121f3b;
+ }
+
+ #div_neona{
+    background: none;
+    position: static;
+    margin-left: 735px;
+    margin-top: -40px;
+    width: 10px;
+ }
+
+ .hr{
+     width: 650px;
+     border-top: solid 0.5px;
+ }
+
+ footer{
+     font-family: "Neuville";
+ }
+

@@ -1,0 +1,168 @@
+*{
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+    background-color: #121f3b;
+    color: #fffffa;
+}
+
+li, a{
+    font-family: "Neuville";
+    font-weight: normal;
+    font-size: 20px;
+    color: #fffffa;
+    text-decoration: none;
+    
+}
+
+header{
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+    padding: 40px 5%;
+
+}
+
+.logo{
+   cursor: pointer; 
+   margin-right: auto;
+}
+
+.links{
+    list-style: none;
+}
+
+.links li{
+    display: inline-block;
+    padding: 0px 100px;
+}
+
+.links li a{
+    transition: all 0.3s ease 0s;
+    padding: 0px 50px;
+}
+
+.links li a:hover{
+    color: rgb(255, 219, 102);
+}
+
+button{
+    padding: 9px 23px;
+    background-color: aquamarine;
+    border: none;
+
+}
+
+.hero{
+    display: flex;
+    align-items: center;
+    padding: 15% 9%;
+}
+
+#info{
+    margin-top: 10%;
+    display: flex;
+    align-items: center;
+}
+
+#whyData{
+    font-family: "Neuville";
+    font-size: 50px;
+    margin-left: 10%;
+}
+
+.blog{
+    font-family: "Neuville";
+    font-weight: lighter;
+    font-size: 30px;
+    width: 700px;
+}
+
+.blog a{
+    font-family: "Neuville";
+    font-weight: lighter;
+    font-size: 30px;
+    color: rgb(255, 219, 102);
+    transition: all 0.3s ease 0s;
+}
+
+.blog a:hover{
+    color: rgb(62, 62, 255);
+}
+
+.chartDiv{
+    margin-top: 10%;
+}
+
+.infoChart h1{
+    font-family: "Neuville";
+    font-weight: bold;
+    font-size: 50px;
+    margin-left: 5%;
+    
+
+}
+.infoChart p{
+    font-family: "Neuville";
+    font-weight: lighter;
+    font-size: 20px;
+    width: 80%;
+    margin-left: 5%;
+
+}
+
+.seperator{
+    margin-top: 100px;
+    text-align: center;
+    font-size: 50px;
+    color: #fffffa;
+    
+
+}
+
+.chart{
+    padding-top: 5%;
+}
+
+#special1{
+    margin-top: 10px;
+}
+
+#special2{
+    display: flex;
+    align-items: center;
+    padding: 0.2% 9%; 
+    margin-top: 10px; 
+}
+
+#neona{
+    display: inline-block;
+    padding: 15px 30px;
+    color: #fffffa;
+    overflow: hidden;
+    transition: 0.5s;
+    border: #fffffa solid 1px;
+}
+
+ #neona:hover{
+     color: #121f3b;
+     background: #fffffa;
+     box-shadow: 0 0 10px #fffffa, 0 0 20px #fffffa, 0 0 80px #fffffa;
+ }
+
+ #div_neona{
+    background: none;
+    margin-left: 735px;
+    margin-top: -40px;
+    width: 10px;
+ }
+
+ .hr{
+    width: 650px;
+    border-top: solid 0.5px;
+    color: #fffffa;
+}
+
+footer{
+    font-family: "Neuville";
+}
