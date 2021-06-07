@@ -166,3 +166,48 @@ button{
 footer{
     font-family: "Neuville";
 }
+
+.user_zone{
+    margin-top: 100px;
+    margin-bottom: 100px;
+    margin-left: 50px;
+    font-family: 'Neuville';
+}
+
+#kaka{
+   font-size: 30px;
+   font-weight: light;
+
+}
+#userwants{
+    font-size: 70px;
+    font-weight: bold;
+}
+
+select{
+    padding: 20px;
+    margin: 5px 10px 10px 0px;
+    font-family: "Neuville";
+}
+
+.submit{
+    margin-top: 50px;
+    padding: 20px;
+    transition: 0.4s;
+    font-family: "Neuville";
+    font-size: 20px;
+    border: #fffffa solid 1px;
+}
+
+.submit:hover{
+    cursor: pointer;
+    background: #fffffa;
+    color: #121f3b;
+    transition: 0.5s;
+}
+
+.summary_img{
+    position: relative;
+    margin-left: 750px;
+    margin-top: -600px;
+}

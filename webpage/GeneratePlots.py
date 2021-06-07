@@ -311,3 +311,78 @@ def generate(background= "#fffbf2", front= "#424242", theme= 'light'):
     
     print('DONE.')
     return True
+
+
+def get_summary(uni, type_, diff, theme):
+    highlight = '#1f8bff' if theme == 'light' else "#1fffe5"
+    savepath = f"./static/{theme}/"
+
+    background = "#fffbf2" if theme == 'light' else "#121f3b"
+    front = "#424242" if theme == 'light' else "#fffffa"
+
+    non_NaN_df = df.dropna()
+    plt.rcParams['figure.facecolor'] = background
+    plt.rcParams['font.family'] = 'Neuville'
+    plt.rcParams['text.color'] = front
+    plt.rcParams['axes.labelcolor'] = front
+    plt.rcParams['axes.facecolor'] = background
+    plt.rcParams['xtick.color'] = front
+    plt.rcParams['ytick.color'] = front
+
+    plt.rcParams['axes.spines.left'] = False
+    plt.rcParams['axes.spines.right'] = False
+    plt.rcParams['axes.spines.top'] = False
+    plt.rcParams['axes.spines.bottom'] = False
+    
+    filter_ = '(non_NaN_df.university == uni)'
+    if type_:
+        filter_ += ' & '
+        filter_ += '(non_NaN_df.type == type_)'
+    if diff:
+        filter_ += ' & '
+        filter_ += '(non_NaN_df.difficulty == diff)'
+        
+    hey = non_NaN_df[eval(filter_)]
+    count = hey.shape[0]
+    top3_names_rating = hey.sort_values(by= 'review', ascending= False)[:3]['course']
+    top3_reviews_rating = hey.sort_values(by= 'review', ascending= False)[:3]['review']
+
+    top3_names_stud = hey.sort_values(by= 'students', ascending= False)[:3]['course']
+    top3_enroll_stud = hey.sort_values(by= 'students', ascending= False)[:3]['students']
+
+
+    fig = plt.figure(figsize= (15, 20))
+    ax = plt.axes()
+    ax.set(xticks = [], yticks = [])
+
+    ax.text(.05, .95, f"{count}", fontsize= 50, fontweight= "bold")
+    ax.text(.15, .95, f"Programs Found", fontsize= 50, fontweight= "light")
+    ax.text(.05, .89, "from: ", fontsize= 50, fontweight= "light")
+    if len(uni) > 20:
+        uni = list(uni)
+        uni.insert(20, "\n")
+        uni = ''.join(uni)
+        ax.text(.23, .838, uni, fontsize= 50, fontweight= "bold")
+    else:
+        ax.text(.23, .89, uni, fontsize= 50, fontweight= "bold")
+        
+    ax.text(.05, .80, '__', fontsize= 50, fontweight= "bold", color= highlight)
+    ax.text(.05, .70, 'Top 3 Most rated courses', fontsize= 50, fontweight= "bold")
+    ax.text(.23, .69, '__________', fontsize= 46, fontweight= "bold", color= highlight)
+
+
+    for idx, (y, course, rate)  in enumerate(zip(np.linspace(.60, .42, 3), top3_names_rating, top3_reviews_rating)):
+        ax.text(.05, y, str(idx + 1) +". ", fontsize= 35, fontweight= "bold", color= highlight)
+        ax.text(.1, y, course, fontsize= 46, fontweight= "light")
+        ax.text(.1, y-.03, "(" + str(round(rate,1)) + ")", fontsize= 25, fontweight= "light")
+        
+    ax.text(.05, .28, 'Top 3 Most Enrolled courses', fontsize= 50, fontweight= "bold")
+    ax.text(.23, .27, '____________', fontsize= 47, fontweight= "bold", color= highlight)
+
+
+    for idx, (y, course, rate)  in enumerate(zip(np.linspace(.20, .02, 3), top3_names_stud, top3_enroll_stud)):
+        ax.text(.05, y, str(idx + 1) +". ", fontsize= 35, fontweight= "bold", color= highlight)
+        ax.text(.1, y, course, fontsize= 46, fontweight= "light")
+        ax.text(.1, y-.03, "(" + str(round(rate)) + ")", fontsize= 25, fontweight= "light")
+
+    plt.savefig(savepath + 'summary.png', bbox_inches= 'tight', transparent= True)

@@ -154,7 +154,37 @@
 
 
     <div class="seperator">. . .</div>
+    <div class="user_zone">
+        <p id="kaka"> Other than this... </p>
+        <p id= "userwants"> WHAT YOU WANT <p>
 
+        <form action= "#" method= "post">
+            <br> <br> <b>University</b><br>
+            <select name= 'uniselect'>
+                {% for uni in universities %}
+                    <option value="{{uni}}"> {{ uni }} </option>
+                {% endfor %}
+            </select> <br> <br>
+
+            <b>Program Type </b><br>
+            <select name= 'typeselect'>
+                {% for typ in type_ %}
+                    <option value="{{typ}}"> {{ typ }} </option>
+                {% endfor %}
+            </select> <br> <br>
+
+            <b>Program Difficulty</b><br>
+            <select name= 'diffselect'>
+                {% for diff in difficulty %}
+                    <option value="{{diff}}"> {{ diff }} </option>
+                {% endfor %}
+            </select> <br>
+            <input type= "submit" value= "Get data" class= "submit">
+        </form>
+        {% if goforit == True %}
+            <img src= {{ url_for('static', filename= './dark/summary.png') }} class= 'summary_img'/>
+        {% endif %}
+    </div>
     <footer>
         <br>
         <br>
