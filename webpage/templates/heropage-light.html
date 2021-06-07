@@ -168,6 +168,7 @@
 
             <b>Program Type </b><br>
             <select name= 'typeselect'>
+                <option value="ALL"> -- SHOW ALL --</option>
                 {% for typ in type_ %}
                     <option value="{{typ}}"> {{ typ }} </option>
                 {% endfor %}
@@ -175,6 +176,7 @@
 
             <b>Program Difficulty</b><br>
             <select name= 'diffselect'>
+                <option value="ALL"> -- SHOW ALL --</option>
                 {% for diff in difficulty %}
                     <option value="{{diff}}"> {{ diff }} </option>
                 {% endfor %}

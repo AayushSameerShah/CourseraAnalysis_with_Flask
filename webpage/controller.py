@@ -1,9 +1,15 @@
 from flask import Flask, render_template, request
 import GeneratePlots
 import df_stuff
+import os
 
 web = Flask(__name__)
 unis, type_, diff = df_stuff.fetch_list()
+
+def dir_last_updated(folder):
+    return str(max(os.path.getmtime(os.path.join(root_path, f))
+                   for root_path, dirs, files in os.walk(folder)
+                   for f in files))
 
 @web.route("/", methods= ["POST", "GET"])
 @web.route("/home", methods= ["POST", "GET"])
@@ -38,7 +44,8 @@ def regenerate(theme):
             typeSelect = request.form['typeselect']
             diffSelect = request.form['diffselect']
             GeneratePlots.get_summary(uniSelect, typeSelect, diffSelect, theme)
-        return render_template("heropage-light.html", universities= unis, type_= type_, difficulty= diff)
+            return render_template("heropage-light.html", universities= unis, type_= type_, difficulty= diff, goforit= True)
+        return render_template("heropage-light.html", universities= unis, type_= type_, difficulty= diff, goforit= False)
     else:
         back = '#121f3b'
         front = '#fffffa'
@@ -48,7 +55,8 @@ def regenerate(theme):
             typeSelect = request.form['typeselect']
             diffSelect = request.form['diffselect']
             GeneratePlots.get_summary(uniSelect, typeSelect, diffSelect, theme)
-        return render_template("heropage-dark.html", universities= unis, type_= type_, difficulty= diff)
+            return render_template("heropage-dark.html", universities= unis, type_= type_, difficulty= diff, goforit= True)
+        return render_template("heropage-dark.html", universities= unis, type_= type_, difficulty= diff, goforit= False)
 
 if __name__ == '__main__':
-    web.run(debug= True)
+    web.run(debug= False)
