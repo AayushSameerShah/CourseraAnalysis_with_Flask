@@ -2,6 +2,7 @@ import pandas as pd
 import numpy as np
 import matplotlib.pyplot as plt
 import seaborn as sns
+from matplotlib import cm
 sns.set();
 
 plt.rcParams['figure.figsize'] = 20, 10
@@ -10,7 +11,7 @@ plt.rcParams['axes.grid'] = False
 
 df = pd.read_pickle('../data/scraped_data')
 
-from matplotlib import cm
+colors_map =  ['Accent', 'Blues', 'Blues', 'BrBG', 'BrBG', 'BuGn', 'BuGn', 'BuPu', 'BuPu', 'CMRmap', 'CMRmap', 'Dark2', 'Dark2', 'GnBu', 'GnBu', 'Greens', 'Greens', 'Greys', 'Greys', 'OrRd', 'OrRd', 'Oranges', 'Oranges', 'PRGn', 'PRGn', 'Paired', 'Paired', 'Pastel1', 'Pastel1', 'Pastel2', 'Pastel2', 'PiYG', 'PiYG', 'PuBu', 'PuBuGn', 'PuBuGn', 'PuBu', 'PuOr', 'PuOr', 'PuRd', 'PuRd', 'Purples', 'Purples', 'RdBu', 'RdBu', 'RdGy', 'RdGy', 'RdPu', 'RdPu', 'RdYlBu', 'RdYlBu', 'RdYlGn', 'RdYlGn', 'Reds', 'Reds', 'Set1', 'Set1', 'Set2', 'Set2', 'Set3', 'Set3', 'Spectral', 'Spectral', 'Wistia', 'Wistia', 'YlGn', 'YlGnBu', 'YlGnBu', 'YlGn', 'YlOrBr', 'YlOrBr', 'YlOrRd', 'YlOrRd', 'afmhot', 'afmhot', 'autumn', 'autumn', 'binary', 'binary', 'bone', 'bone', 'brg', 'brg', 'bwr', 'bwr', 'cividis', 'cividis', 'cool', 'cool', 'coolwarm', 'coolwarm', 'copper', 'copper', 'crest', 'crest', 'cubehelix', 'cubehelix', 'flag', 'flag', 'flare', 'flare', 'gist_earth', 'gist_earth', 'gist_gray', 'gist_gray', 'gist_heat', 'gist_heat', 'gist_ncar', 'gist_ncar', 'gistainbow', 'gistainbow', 'gist_stern', 'gist_stern', 'gist_yarg', 'gist_yarg', 'gnuplot', 'gnuplot2', 'gnuplot2', 'gnuplot', 'gray', 'gray', 'hot', 'hot', 'hsv', 'hsv', 'icefire', 'icefire', 'inferno', 'inferno', 'jet', 'jet', 'magma', 'magma', 'mako', 'mako', 'nipy_spectral', 'nipy_spectral', 'ocean', 'ocean', 'pink', 'pink', 'plasma', 'plasma', 'prism', 'prism', 'rainbow', 'rainbow', 'rocket', 'rocket', 'seismic', 'seismic', 'spring', 'spring', 'summer', 'summer', 'tab10', 'tab10', 'tab20', 'tab20', 'tab20b', 'tab20b', 'tab20c', 'tab20c', 'terrain', 'terrain', 'turbo', 'turbo', 'twilight', 'twilight', 'twilight_shifted', 'twilight_shifted', 'viridis', 'viridis', 'vlag', 'vlag', 'winter', 'winter']
 
 def get_color_spectrum(start, end, n, flipped= False, spectrum = "seismic"):
     if flipped:
@@ -35,7 +36,8 @@ def plot_bar_values(plot, values, xoffset= 1, yoffset= 0.2, type_ = 'v', fontdic
         y = patch.get_y() if type_ == 'h' else patch.get_height()
         plt.text(x + xoffset, y + yoffset, str(val), fontdict= fontdict, **kwargs)
 
-def generate(background= "#fffbf2", front= "#424242"):
+def generate(background= "#fffbf2", front= "#424242", theme= 'light'):
+    palette = np.random.choice(colors_map)
     plt.rcParams['figure.facecolor'] = background
     plt.rcParams['font.family'] = 'Neuville'
     plt.rcParams['text.color'] = front
@@ -49,26 +51,27 @@ def generate(background= "#fffbf2", front= "#424242"):
     plt.rcParams['axes.spines.top'] = False
     plt.rcParams['axes.spines.bottom'] = False
 
-    savepath = "./static/"
+    savepath = f"./static/{theme}/"
 
     print("[STARTING]")
     # 1
-    fig = plt.figure(dpi= 250)
+    fig = plt.figure(figsize= (20, 10))
     ax = plt.axes()
     ax.set_facecolor(background)
     ax.set(xlabel= "Course Count", ylabel= "University")
     topUni = df.university.value_counts()[:10][::-1]
-    plot = plt.barh(topUni.index, topUni.values, color= get_color_spectrum(.1, .9, 10, flipped= False, spectrum= 'Blues'))
+    plot = plt.barh(topUni.index, topUni.values, color= get_color_spectrum(.1, .9, 10, flipped= False, spectrum= palette))
     plot_bar_values(plot, topUni.values, type_= 'h', xoffset= 5)
-    fig.savefig(savepath + 'top10uniCourses.png', bbox_inches= 'tight', transparent= True, dpi= 250)
+    fig.savefig(savepath + 'top10uniCourses.png', bbox_inches= 'tight', transparent= True)
     print("[DONE] 1")
 
 
     # 2
+    fig = plt.figure(figsize= (20, 10))
     ax = plt.axes()
     ax.set_facecolor(background)
     topUni = df[df.type != 'GUIDED PROJECT'].university.value_counts()[:10][::-1]
-    plot = plt.barh(topUni.index, topUni.values, color= get_color_spectrum(.4, .6, 10, flipped= False, spectrum= 'Blues'))
+    plot = plt.barh(topUni.index, topUni.values, color= get_color_spectrum(.4, .6, 10, flipped= False, spectrum= palette))
     plot_bar_values(plot, topUni.values, type_= 'h')
     ax.set(xlabel= "Course Count", ylabel= "University")
     desc = \
@@ -79,15 +82,15 @@ def generate(background= "#fffbf2", front= "#424242"):
     in comparision to the rest'''
 
     ax.text(90, 2, desc, fontsize= 30, fontweight= 'light', ha= 'right');
-    plt.savefig(savepath + 'top10uniCourses2.png', bbox_inches= 'tight', transparent= True, dpi= 250)
+    plt.savefig(savepath + 'top10uniCourses2.png', bbox_inches= 'tight', transparent= True)
     print("[DONE] 2")
 
 
     # 3
-    fig = plt.figure()
+    fig = plt.figure(figsize= (20, 10))
     ax1 = plt.axes()
     courseType = df.type.value_counts()
-    plot = plt.bar(courseType.index, courseType.values, color= get_color_spectrum(.8, .5, len(courseType), flipped= False, spectrum= 'Blues'))
+    plot = plt.bar(courseType.index, courseType.values, color= get_color_spectrum(.8, .5, len(courseType), flipped= False, spectrum= palette))
     plot_bar_values(plot, courseType.values, xoffset= 0.35, yoffset= 5)
     ax1.set_yticks([])
     ax2 = fig.add_axes([0.4, 0.5, 0.3, 0.5])
@@ -101,7 +104,7 @@ def generate(background= "#fffbf2", front= "#424242"):
     ax2.set_xlabel('')
     ax2.set_xlim([60, 0])
     ax2.set_title("Top universities provides what")
-    plt.savefig(savepath + 'coursetype.png', bbox_inches= 'tight', transparent= True, dpi= 250)
+    plt.savefig(savepath + 'coursetype.png', bbox_inches= 'tight', transparent= True)
     print("[DONE] 3")
 
 
@@ -134,15 +137,15 @@ def generate(background= "#fffbf2", front= "#424242"):
     ax.set_xticks(range(0,6));
     ax.set_title("Average reviews of top / bottom 10 universities (Sorted by votes)")
     ax.set_xlabel("Average review out of 5")
-    plt.savefig(savepath + 'reviews.png', bbox_inches= 'tight', transparent= True, dpi= 250)
+    plt.savefig(savepath + 'reviews.png', bbox_inches= 'tight', transparent= True)
     print("[DONE] 4")
 
 
     # 5
-    fig = plt.figure(dpi= 200)
+    fig = plt.figure(figsize= (20, 10), dpi= 200)
     uniStud = df.groupby("university")['students'].sum().sort_values(ascending= False).round(1)
     unis = uniStud[:45]
-    plt.bar(unis.index, unis.values, color= get_color_spectrum(.0, .8, len(unis), spectrum= "Blues", flipped= True));
+    plt.bar(unis.index, unis.values, color= get_color_spectrum(.0, .8, len(unis), spectrum= palette, flipped= True));
     plt.xticks(rotation= 90);
     plt.hlines(uniStud.mean(), xmin= 0, xmax= uniStud.index[-1], ls= '--', lw= 2, color= front)
     plt.annotate("Mean: 518092 Students", xy= ("University of London", 518092), xytext= (30, 2018092),
@@ -158,21 +161,21 @@ def generate(background= "#fffbf2", front= "#424242"):
     '''
     plt.text(10, 90_00_000, title, fontdict= dict(fontsize= 40, fontweight= 'bold'))
     plt.text(10, 65_00_000, desc, fontdict= dict(fontsize= 20, fontweight= 'light'));
-    plt.savefig(savepath + 'students.png', bbox_inches= 'tight', transparent= True, dpi= 250)
+    plt.savefig(savepath + 'students.png', bbox_inches= 'tight', transparent= True)
     print("[DONE] 5")
 
     
     # 6
-    fig = plt.figure()
+    fig = plt.figure(figsize= (20, 10))
     ax = fig.add_axes([1,1,1,1])
     ax2 = fig.add_axes([1.5,1.5,0.5,0.5])
     sns.countplot(x= "difficulty", data= df, hue= 'type', ax = ax, saturation= 1)
 
     diff = df.difficulty.value_counts()
-    plot = ax2.bar(diff.index, diff.values, color= get_color_spectrum(.7, .9, 1, spectrum= "Blues"))
+    plot = ax2.bar(diff.index, diff.values, color= get_color_spectrum(.7, .9, 1, spectrum= palette))
     ax2.set_yticks([])
     plot_bar_values(plot, diff.values, xoffset= 0.38, yoffset= -35, fontdict={"fontfamily": "product sans", "size": 20}, ha= 'center')
-    plt.savefig(savepath + 'difficulty.png', bbox_inches= 'tight', transparent= True, dpi= 250)
+    plt.savefig(savepath + 'difficulty.png', bbox_inches= 'tight', transparent= True)
     print("[DONE] 6")
 
 
@@ -196,7 +199,7 @@ def generate(background= "#fffbf2", front= "#424242"):
     l1 = line.Line2D([0.2, 0.8], [0.75, 0.75], transform=fig.transFigure, figure=fig, color = 'grey', linestyle='-',linewidth = 3, alpha = 0.6)
     fig.lines.extend([l1])
 
-    for course, x, color in zip(["Beginner", "Intermediate", "Mixed", "Advanced"], [0.1, 0.35, 0.60, 0.85], get_color_spectrum(0, .4, 4, spectrum= 'rainbow', flipped= True)):
+    for course, x, color in zip(["Beginner", "Intermediate", "Mixed", "Advanced"], [0.1, 0.35, 0.60, 0.85], get_color_spectrum(0, .4, 4, spectrum= palette, flipped= True)):
         plt.text(x, -0.1, course, ha= "center",  fontfamily= 'Neuville', fontweight= "bold", fontsize= 40, color= color)
         for row, ofset in zip(eval(course)[['course', 'university']].iterrows(), np.arange(0.2, 0.7, 0.2)):
             plt.text(x, ofset, row[1][0], ha= "center", fontfamily= 'Neuville', fontweight= 'regular', fontsize= 25, color= color)
@@ -206,7 +209,7 @@ def generate(background= "#fffbf2", front= "#424242"):
     l3 = line.Line2D([0.50, 0.50], [0.1, 0.70], transform=fig.transFigure, figure=fig, color = 'grey', linestyle='-',linewidth = 3, alpha = 0.3)
     l4 = line.Line2D([0.68, 0.68], [0.1, 0.70], transform=fig.transFigure, figure=fig, color = 'grey', linestyle='-',linewidth = 3, alpha = 0.3)
     fig.lines.extend([l2, l3, l4])
-    plt.savefig(savepath + 'difficultyCourses.png', bbox_inches= 'tight', transparent= True, dpi= 250)
+    plt.savefig(savepath + 'difficultyCourses.png', bbox_inches= 'tight', transparent= True)
     print("[DONE] 7")
 
 
@@ -215,9 +218,9 @@ def generate(background= "#fffbf2", front= "#424242"):
     
     pattern = r'(\bA\.?I\.?\b)|(\bM\.?L\.?\b)|(\bD\.?L\.?\b)|(\bN\.?L\.?P\.?\b)(Artificial Intelligence)|(Machine Learning)|(Deep Learning)|(Reinforcement Learning)|(Tensor\s?Flow)|(Natural Language Processing)|(Neural Networks?)'
     with_MlAiDl = df[df.course.str.match(pattern, flags= re.IGNORECASE)]
-    plt.figure(dpi= 200)
+    fig = plt.figure(figsize= (20, 10), dpi= 200)
     ax = plt.axes()
-    plot = with_MlAiDl.university.value_counts()[::-1].plot(kind= 'bar', color= get_color_spectrum(0.1, .7, 14, spectrum= 'Blues'))
+    plot = with_MlAiDl.university.value_counts()[::-1].plot(kind= 'bar', color= get_color_spectrum(0.1, .7, 14, spectrum= palette))
     plot_bar_values(plot, with_MlAiDl.university.value_counts()[::-1].values, type_= 'v', xoffset= 0.2, yoffset= 0.1)
     ax.set_xlabel("Universities with corses on AI")
     ax.set_ylabel("Count")
@@ -234,7 +237,7 @@ def generate(background= "#fffbf2", front= "#424242"):
     ax.set_yticks([])
     ax.text(0, 27, title, fontsize= 35)
     ax.text(0, 18, desc, fontsize= 18, fontweight= 'light');
-    plt.savefig(savepath + 'AICourses.png', bbox_inches= 'tight', transparent= True, dpi= 250)
+    plt.savefig(savepath + 'AICourses.png', bbox_inches= 'tight', transparent= True)
     print("[DONE] 8")
 
 
@@ -254,10 +257,10 @@ def generate(background= "#fffbf2", front= "#424242"):
 
     for idx, ax in enumerate([ax1, ax2, ax3, ax4, ax5]):
         ax.set(xticks= [], yticks= [])
-        patches, _, __ = ax.pie(AI_vs_REST.iloc[idx], colors= get_color_spectrum(.3, .35, 2, spectrum= 'jet'), autopct= "%.2f%%")
+        patches, _, __ = ax.pie(AI_vs_REST.iloc[idx], colors= get_color_spectrum(.3, .35, 2, spectrum= palette), autopct= "%.2f%%")
         ax.set_xlabel(AI_vs_REST.index[idx])
     ax2.legend(patches, ["AI", "REST"], loc=9);
-    plt.savefig(savepath + 'AIpie.png', bbox_inches= 'tight', transparent= True, dpi= 250)
+    plt.savefig(savepath + 'AIpie.png', bbox_inches= 'tight', transparent= True)
     print("[DONE] 9")
 
 
@@ -279,15 +282,15 @@ def generate(background= "#fffbf2", front= "#424242"):
     valids = terms.columns[~(terms.columns.str.lower().isin(stopwords))]
     terms = terms.loc[:, valids]
     most_used = terms.sum(axis= 0).sort_values(ascending= False)
-    
+    fig = plt.figure(figsize= (20, 10))
     ax = plt.axes()
-    _, _, autopects = ax.pie(most_used[:15], colors= get_color_spectrum(.2, .9, 15, spectrum= "Blues", flipped= True), labels=most_used.index.str.title()[:15], 
+    _, _, autopects = ax.pie(most_used[:15], colors= get_color_spectrum(.2, .9, 15, spectrum= palette, flipped= True), labels=most_used.index.str.title()[:15], 
         autopct= "%.1f", pctdistance=.9)
     my_circle=plt.Circle( (0,0), 0.8, color=background)
     plt.setp(autopects, **{'color':'white', 'weight':'bold', 'fontsize':15.5})
 
     ax.add_artist(my_circle)
-    plt.savefig(savepath + 'ring.png', bbox_inches= 'tight', transparent= True, dpi= 250)
+    plt.savefig(savepath + 'ring.png', bbox_inches= 'tight', transparent= True)
     print("[DONE] 10")
 
 
@@ -302,7 +305,9 @@ def generate(background= "#fffbf2", front= "#424242"):
     
     text = ' '.join(all_terms)
     plt.rcParams['figure.figsize'] = (12,12)
-    wordcloud = WordCloud(background_color = background, colormap='Blues', width = 1200,  height = 1080, max_words = 200).generate(text)
+    wordcloud = WordCloud(background_color = background, colormap=palette, width = 1200,  height = 1080, max_words = 200).generate(text)
+    img = np.asarray(wordcloud)
+    plt.imsave(savepath + "wordcloud.png", img)
     
     print('DONE.')
     return True
