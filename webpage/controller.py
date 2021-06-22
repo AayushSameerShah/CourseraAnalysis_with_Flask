@@ -1,15 +1,9 @@
 from flask import Flask, render_template, request
 import GeneratePlots
 import df_stuff
-import os
 
 web = Flask(__name__)
 unis, type_, diff = df_stuff.fetch_list()
-
-def dir_last_updated(folder):
-    return str(max(os.path.getmtime(os.path.join(root_path, f))
-                   for root_path, dirs, files in os.walk(folder)
-                   for f in files))
 
 @web.route("/", methods= ["POST", "GET"])
 @web.route("/home", methods= ["POST", "GET"])
